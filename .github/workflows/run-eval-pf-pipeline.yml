@@ -6,9 +6,9 @@ on:
     branches: [ main ]
 
 env: 
-  GROUP: MLOps
-  WORKSPACE: MLOpsAML
-  SUBSCRIPTION: 30d3124c-3e71-4697-896f-b402a93e24d4
+  GROUP: <Resurce_Group>
+  WORKSPACE: <AML_Workspace>
+  SUBSCRIPTION: <SUB_ID>
   RUN_NAME: web_classification_variant_1_20230816_215600_605116
   EVAL_RUN_NAME: classification_accuracy_eval_default_20230821_111809_077086
 
