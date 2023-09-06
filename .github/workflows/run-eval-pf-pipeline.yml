@@ -48,7 +48,7 @@ jobs:
     - name: get eval run name
       run: |
         EVAL_RUN_NAME_RESULT=$(python promptflow/llmops-helper/parse_run_output.py eval_info.txt)
-        echo "Setting run name dynamic: $EVAL_RUN_NAME_RESULT
+        echo "Setting run name dynamic: $EVAL_RUN_NAME_RESULT"
         echo $EVAL_RUN_NAME_RESULT >> $GITHUB_ENV
     - name: show promptflow details
       run: pfazure run show-details --name ${{env.EVAL_RUN_NAME_2}} --subscription ${{env.SUBSCRIPTION}} -g ${{env.GROUP}} -w ${{env.WORKSPACE}}
