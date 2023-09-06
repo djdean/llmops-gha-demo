@@ -47,13 +47,11 @@ jobs:
       run: pfazure run create -f promptflow/web-classification/run_evaluation.yml --run ${{env.RUN_NAME}} --subscription ${{env.SUBSCRIPTION}} -g ${{env.GROUP}} -w ${{env.WORKSPACE}} --stream > promptflow/llmops-helper/eval_info.txt 
     - name: get eval run name
       run: |
-        EVAL_RUN_NAME_RESULT=$(python promptflow/llmops-helper/parse_run_output.py eval_info.txt)
-        echo "Setting run name dynamic: $EVAL_RUN_NAME_RESULT"
-        echo $EVAL_RUN_NAME_RESULT >> $GITHUB_ENV
+        echo "EVAL_RUN_NAME_RESULT=$(python promptflow/llmops-helper/parse_run_output.py eval_info.txt)" >> "$GITHUB_ENV"
     - name: show promptflow details
-      run: pfazure run show-details --name ${{env.EVAL_RUN_NAME_2}} --subscription ${{env.SUBSCRIPTION}} -g ${{env.GROUP}} -w ${{env.WORKSPACE}}
+      run: pfazure run show-details --name ${{env.EVAL_RUN_NAME_RESULT}} --subscription ${{env.SUBSCRIPTION}} -g ${{env.GROUP}} -w ${{env.WORKSPACE}}
     - name: show promptflow metrics
-      run: pfazure run show-metrics --name ${{env.EVAL_RUN_NAME_2}} --subscription ${{env.SUBSCRIPTION}} -g ${{env.GROUP}} -w ${{env.WORKSPACE}} > promptflow/llmops-helper/eval_result.json 
+      run: pfazure run show-metrics --name ${{env.EVAL_RUN_NAME_RESULT}} --subscription ${{env.SUBSCRIPTION}} -g ${{env.GROUP}} -w ${{env.WORKSPACE}} > promptflow/llmops-helper/eval_result.json 
   
   assert-and-register-model:
     needs: login-and-run-and-evalpf
